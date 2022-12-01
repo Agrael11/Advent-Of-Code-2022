@@ -12,28 +12,36 @@
         /// <returns></returns>
         public static int DoChallange(string input)
         {
-            //Defines Previous Number as first number in the list, and counter of increased items.
+            //Read input data
             string[] inputData = input.Replace("\r", "").TrimEnd('\n').Split('\n');
-            
-            int prevNumber = int.Parse(inputData[0]);
-            int increaseCount = 0;
 
-            //Goes trough every line of input, starting at second element (since first one is already parsed as prevNumber)
-            //If current line is larger than previous line, increment the counter.
-            for (int i = 1; i < inputData.Length; i++)
+            //Prepare variables - list of elves and amount of calories for current elf
+            List<int> elves = new();
+            int elfCalories = 0;
+
+            //For each line in input
+            for (int i = 0; i < inputData.Length; i++)
             {
-                int number = int.Parse(inputData[i]);
-
-                if (number > prevNumber)
+                //If line is empty, add calories carried by current elf to list of elves and reset value of current calories
+                if (string.IsNullOrWhiteSpace(inputData[i]))
                 {
-                    increaseCount++;
+                    elves.Add(elfCalories);
+                    elfCalories = 0;
+                    continue;
                 }
 
-                prevNumber = number;
+                //Add calories of item to current elfs calories
+                elfCalories += int.Parse(inputData[i]);
             }
 
-            //At the end return a number of increased inputs.
-            return increaseCount;
+            //Add calories carried by last elf to list of elves
+            elves.Add(elfCalories);
+
+            //Sort the list
+            elves.Sort();
+
+            //And return the last item (biggest)
+            return elves[^1];
         }
     }
 }

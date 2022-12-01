@@ -12,37 +12,47 @@
         /// <returns></returns>
         public static int DoChallange(string input)
         {
-            //Defines Previous Sum as Sum of first three element on the list, and counter of increased sums.
+            //Read input data
             string[] inputData = input.Replace("\r", "").TrimEnd('\n').Split('\n');
-            int prevSum = GetSum(0, ref inputData);
-            int increaseCount = 0;
 
-            //Goes trough every line of input, starting at second element (since first one is already parsed as prevNumber), excluding last 2 elements
-            //If sum at the current index is larger than sum at last one, increment the counter.
-            for (int i = 1; i < inputData.Length - 2; i++)
+            //Prepare variables - list of elves and amount of calories for current elf
+            List<int> elves = new();
+            int elfCalories = 0;
+
+            //For each line in input
+            for (int i = 0; i < inputData.Length; i++)
             {
-                int number = GetSum(i, ref inputData);
-
-                if (number > prevSum)
+                //If line is empty, add calories carried by current elf to list of elves and reset value of current calories
+                if (string.IsNullOrWhiteSpace(inputData[i]))
                 {
-                    increaseCount++;
+                    elves.Add(elfCalories);
+                    elfCalories = 0;
+                    continue;
                 }
-                prevSum = number;
+
+                //Add calories of item to current elfs calories
+                elfCalories += int.Parse(inputData[i]);
             }
 
-            //At the end return a number of increased input sums.
-            return increaseCount;
+            //Add calories carried by last elf to list of elves
+            elves.Add(elfCalories);
+
+            //Sort the list
+            elves.Sort();
+
+            //And return the last three items (biggest)
+
+            return SumLastThree(elves);
         }
 
         /// <summary>
-        /// Gets sum of three elements in list, starting at index.
+        /// Sums last three elements of list
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="inputData"></param>
+        /// <param name="elves">Input list</param>
         /// <returns></returns>
-        static int GetSum(int index, ref string[] inputData)
+        public static int SumLastThree(List<int> elves)
         {
-            return int.Parse(inputData[index]) + int.Parse(inputData[index + 1]) + int.Parse(inputData[index + 2]);
+            return elves[^1] + elves[^2] + elves[^3];
         }
     }
 }
