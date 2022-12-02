@@ -17,9 +17,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Advent-Of-Code-2022-01\Advent-Of-Code-2022-01.csproj" />
+    <ProjectReference Include="..\Advent-Of-Code-2022-02\Advent-Of-Code-2022-02.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Examples\Challange02\example01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Challange01\example01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
