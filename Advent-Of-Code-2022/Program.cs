@@ -71,7 +71,7 @@ namespace AdventOfCode
                 {
                     1 => Day01.Challange1.DoChallange(inputData).ToString(),
                     2 => Day02.Challange1.DoChallange(inputData).ToString(),
-                    //3 => Day03.Challange1.DoChallange(inputData).ToString(),
+                    3 => Day03.Challange1.DoChallange(inputData).ToString(),
                     //4 => Day04.Challange1.DoChallange(inputData).ToString(),
                     //5 => Day05.Challange1.DoChallange(inputData).ToString(),
                     //6 => Day06.Challange1.DoChallange(inputData).ToString(),
@@ -111,7 +111,7 @@ namespace AdventOfCode
                 {
                     1 => Day01.Challange2.DoChallange(inputData).ToString(),
                     2 => Day02.Challange2.DoChallange(inputData).ToString(),
-                    //3 => Day03.Challange2.DoChallange(inputData).ToString(),
+                    3 => Day03.Challange2.DoChallange(inputData).ToString(),
                     //4 => Day04.Challange2.DoChallange(inputData).ToString(),
                     //5 => Day05.Challange2.DoChallange(inputData).ToString(),
                     //6 => Day06.Challange2.DoChallange(inputData).ToString(),
