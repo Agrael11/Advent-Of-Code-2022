@@ -12,10 +12,10 @@
     <ProjectReference Include="..\Advent-Of-Code-2022-01\Advent-Of-Code-2022-01.csproj" />
     <ProjectReference Include="..\Advent-Of-Code-2022-02\Advent-Of-Code-2022-02.csproj" />
     <ProjectReference Include="..\Advent-Of-Code-2022-03\Advent-Of-Code-2022-03.csproj" />
-    <ProjectReference Include="..\Advent-Of-Code-2022-05\Advent-Of-Code-2022-05.csproj" />
-    <ProjectReference Include="..\Advent-Of-Code-2022-06\Advent-Of-Code-2022-06.csproj" />
-    <ProjectReference Include="..\Advent-Of-Code-2022-07\Advent-Of-Code-2022-07.csproj" />
-    <ProjectReference Include="..\Advent-Of-Code-2022-4\Advent-Of-Code-2022-04.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-04\Advent-Of-Code-2022-04.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-05\Advent-Of-Code-2022-05.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-06\Advent-Of-Code-2022-06.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-07\Advent-Of-Code-2022-07.csproj" />
   </ItemGroup>
 
   <ItemGroup>

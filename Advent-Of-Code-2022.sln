@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent-Of-Code-2022-02", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent-Of-Code-2022-03", "Advent-Of-Code-2022-03\Advent-Of-Code-2022-03.csproj", "{E06A0F32-B604-40D9-9EB0-38D1FD165DF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent-Of-Code-2022-04", "Advent-Of-Code-2022-4\Advent-Of-Code-2022-04.csproj", "{95FD2DED-1A54-4C37-92DB-1C0D046581B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent-Of-Code-2022-04", "Advent-Of-Code-2022-04\Advent-Of-Code-2022-04.csproj", "{95FD2DED-1A54-4C37-92DB-1C0D046581B4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Advent-Of-Code-2022-05", "Advent-Of-Code-2022-05\Advent-Of-Code-2022-05.csproj", "{CB7CDFE5-F6B2-4A9E-B563-CBB945004AF4}"
 EndProject
