@@ -32,8 +32,11 @@ namespace AdventOfCode.Day09
             Point tail = new(0, 0);
             Point head = new(0, 0);
             //List of visited places by tail
-            List<Point> visited = new ();
-            
+            List<Point> visited = new()
+            {
+                tail
+            };
+
             //For each step of every instruction move head and knot accordingly
             foreach (string line in inputData)
             {

@@ -32,7 +32,10 @@ namespace AdventOfCode.Day09
             Point[] knots = { new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) };
             Point head = new(0, 0);
             //List of visited positions by last knot
-            List<Point> visited = new();
+            List<Point> visited = new()
+            {
+                knots[8]
+            };
 
             //For each step of instruction move head, and knots accordingly
             foreach (string line in inputData)
@@ -60,8 +63,7 @@ namespace AdventOfCode.Day09
                 }
             }
 
-            //No idea why i'm missing one, and I DON'T CARE. IT WORKS
-            return visited.Count + 1;
+            return visited.Count;
         }
 
         /// <summary>
