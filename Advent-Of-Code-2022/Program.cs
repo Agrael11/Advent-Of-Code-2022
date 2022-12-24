@@ -14,7 +14,7 @@ namespace AdventOfCode
             string result = ""; 
             while (result.ToUpper() != "Q")
             {
-                Console.WriteLine("Advent of Code 2021!");
+                Console.WriteLine("Advent of Code 2022!");
                 Console.Write("Select the challange [1-25] or all challanges [A], write [Q] to quit: ");
                 result = Console.ReadLine() ?? "";
 
@@ -77,7 +77,7 @@ namespace AdventOfCode
                     6 => Day06.Challange1.DoChallange(inputData).ToString(),
                     7 => Day07.Challange1.DoChallange(inputData).ToString(),
                     8 => Day08.Challange1.DoChallange(inputData).ToString(),
-                    //9 => Day09.Challange1.DoChallange(inputData).ToString(),
+                    9 => Day09.Challange1.DoChallange(inputData).ToString(),
                     //10 => Day10.Challange1.DoChallange(inputData).ToString(),
                     //11 => Day11.Challange1.DoChallange(inputData).ToString(),
                     //12 => Day12.Challange1.DoChallange(inputData).ToString(),
@@ -117,7 +117,7 @@ namespace AdventOfCode
                     6 => Day06.Challange2.DoChallange(inputData).ToString(),
                     7 => Day07.Challange2.DoChallange(inputData).ToString(),
                     8 => Day08.Challange2.DoChallange(inputData).ToString(),
-                    //9 => Day09.Challange2.DoChallange(inputData).ToString(),
+                    9 => Day09.Challange2.DoChallange(inputData).ToString(),
                     //10 => Day10.Challange2.DoChallange(inputData).ToString(),
                     //11 => Day11.Challange2.DoChallange(inputData).ToString(),
                     //12 => Day12.Challange2.DoChallange(inputData).ToString(),
