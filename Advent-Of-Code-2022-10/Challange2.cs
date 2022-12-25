@@ -57,11 +57,11 @@ namespace AdventOfCode.Day10
 
                     if (pcoffset + 1 >= regX && pcoffset + 1 <= regX + 2)
                     {
-                        result += "#";
+                        result += "█";
                     }
                     else
                     {
-                        result += ".";
+                        result += "░";
                     }
 
                     programCounter++;
