@@ -32,7 +32,7 @@ namespace AdventOfCode.Day09
             Point[] knots = { new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) , new(0, 0) };
             Point head = new(0, 0);
             //List of visited positions by last knot
-            List<Point> visited = new()
+            HashSet<Point> visited = new()
             {
                 knots[8]
             };

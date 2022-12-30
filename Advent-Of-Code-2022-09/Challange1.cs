@@ -32,7 +32,7 @@ namespace AdventOfCode.Day09
             Point tail = new(0, 0);
             Point head = new(0, 0);
             //List of visited places by tail
-            List<Point> visited = new()
+            HashSet<Point> visited = new()
             {
                 tail
             };
