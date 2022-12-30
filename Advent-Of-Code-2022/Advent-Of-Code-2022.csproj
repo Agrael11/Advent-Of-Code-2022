@@ -22,9 +22,13 @@
 	<ProjectReference Include="..\Advent-Of-Code-2022-11\Advent-Of-Code-2022-11.csproj" />
 	<ProjectReference Include="..\Advent-Of-Code-2022-12\Advent-Of-Code-2022-12.csproj" />
 	<ProjectReference Include="..\Advent-Of-Code-2022-13\Advent-Of-Code-2022-13.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-14\Advent-Of-Code-2022-14.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="inputData14.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="inputData13.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
