@@ -26,6 +26,8 @@ namespace AdventOfCode.Day14
         /// <returns></returns>
         public static int DoChallange(string input)
         {
+            _blockMap.Clear();
+            _sandMap.Clear();
             //Read input data
             string[] inputData = input.Replace("\r", "").TrimEnd('\n').Split('\n');
 
