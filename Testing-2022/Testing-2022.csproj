@@ -30,9 +30,13 @@
 	<ProjectReference Include="..\Advent-Of-Code-2022-12\Advent-Of-Code-2022-12.csproj" />
 	<ProjectReference Include="..\Advent-Of-Code-2022-13\Advent-Of-Code-2022-13.csproj" />
 	<ProjectReference Include="..\Advent-Of-Code-2022-14\Advent-Of-Code-2022-14.csproj" />
+	<ProjectReference Include="..\Advent-Of-Code-2022-15\Advent-Of-Code-2022-15.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Examples\Challange15\example01.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Challange14\example01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
