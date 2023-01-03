@@ -16,16 +16,16 @@ namespace AdventOfCode.Day16
         public readonly List<TreeNodeTwoPlayers> ContainingNodes = new();
 
         private TreeNodeTwoPlayers? _parent;
-        private int _myDepth;
-        private int _elephantDepth;
+        private int _mySteps;
+        private int _elephantSteps;
 
-        public TreeNodeTwoPlayers(TreeNodeTwoPlayers? parent, string myName, string elephantName, int myDepth, int elephantDepth, int myPrice, int elephantPrice)
+        public TreeNodeTwoPlayers(TreeNodeTwoPlayers? parent, string myName, string elephantName, int mySteps, int elephantSteps, int myPrice, int elephantPrice)
         {
             MyNodeName = myName;
             ElephantNodeName = elephantName;
             _parent = parent;
-            _myDepth = myDepth;
-            _elephantDepth = elephantDepth;
+            _mySteps = mySteps;
+            _elephantSteps = elephantSteps;
             MyPrice = myPrice;
             ElephantPrice = elephantPrice;
         }
@@ -35,8 +35,8 @@ namespace AdventOfCode.Day16
             MyNodeName = startPoint;
             ElephantNodeName = startPoint;
             _parent = null;
-            _myDepth = 0;
-            _elephantDepth = 0;
+            _mySteps = 0;
+            _elephantSteps = 0;
             MyPrice = 0;
             ElephantPrice = 0;
         }
@@ -57,8 +57,8 @@ namespace AdventOfCode.Day16
                     if (nextValveElephants == nextValveMine)
                         continue;
 
-                    int nextDepthMe = _myDepth + 1 + valveDefinitions[nextValveMine].PathCosts[MyNodeName];
-                    int nextDepthElephant = _elephantDepth + 1 + valveDefinitions[nextValveElephants].PathCosts[ElephantNodeName];
+                    int nextDepthMe = _mySteps + 1 + valveDefinitions[nextValveMine].PathCosts[MyNodeName];
+                    int nextDepthElephant = _elephantSteps + 1 + valveDefinitions[nextValveElephants].PathCosts[ElephantNodeName];
                     
                     //If both points would be too deep
                     if (nextDepthElephant > 25 && nextDepthMe > 25)
@@ -76,14 +76,14 @@ namespace AdventOfCode.Day16
                     {
                         nextValveNameElephant = ElephantNodeName;
                         nextPriceElephant = ElephantPrice;
-                        nextDepthElephant = _elephantDepth;
+                        nextDepthElephant = _elephantSteps;
                         newInputs.Remove(nextValveMine);
                     }
                     else if (nextDepthMe > 25)
                     {
                         nextValveNameMine = MyNodeName;
                         nextPriceElephant = MyPrice;
-                        nextDepthElephant = _myDepth;
+                        nextDepthElephant = _mySteps;
                         newInputs.Remove(nextValveElephants);
                     }
                     else

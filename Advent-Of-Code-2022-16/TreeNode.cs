@@ -12,20 +12,20 @@
         public readonly List<TreeNode> ContainingNodes = new();
 
         private TreeNode? _parent;
-        private int _depth;
+        private int _steps;
 
-        public TreeNode(TreeNode? parent, string name, int depth, int price)
+        public TreeNode(TreeNode? parent, string name, int steps, int price)
         {
             NodeName = name;
             _parent = parent;
-            _depth = depth;
+            _steps = steps;
             Price = price;
         }
         public TreeNode(string name)
         {
             NodeName = name;
             _parent = null;
-            _depth = 0;
+            _steps = 0;
             Price = 0;
         }
 
@@ -39,7 +39,7 @@
             foreach (string nextValve in inputs)
             {
                 //If depth would be too long continue with next attempt
-                int depth = _depth + 1 + valveDefinitions[nextValve].PathCosts[NodeName];
+                int depth = _steps + 1 + valveDefinitions[nextValve].PathCosts[NodeName];
                 if (depth > 29)
                     continue;
 
