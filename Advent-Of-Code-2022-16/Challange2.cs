@@ -64,11 +64,14 @@ namespace AdventOfCode.Day16
             valvesWithFlow.Remove("AA");
 
             //Creates node and calculates it's best price. But it takes too long for big input :/
+            List<int> toVisitList = new();
+            for (int i = 0; i < valvesWithFlow.Count; i++)
+            {
+                toVisitList.Add(i);
+            }
 
             TreeNodeTwoPlayers node = new TreeNodeTwoPlayers("AA");
-            node.Build(valvesWithFlow, valveDefinitions);
-
-            return node.GetBestPrice();
+            return node.Build(toVisitList, valvesWithFlow, valveDefinitions);    
         }
 
 

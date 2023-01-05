@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections;
+using System.Linq.Expressions;
 
 namespace AdventOfCode.Day16
 {
@@ -13,11 +14,11 @@ namespace AdventOfCode.Day16
         public int MyPrice { get; set; }
         public int Price { get { return ElephantPrice + MyPrice; } }
 
-        public readonly List<TreeNodeTwoPlayers> ContainingNodes = new();
-
         private TreeNodeTwoPlayers? _parent;
         private int _mySteps;
         private int _elephantSteps;
+        private static HashSet<(int p1, int p2)> _visitedNodePaths = new();
+        public static int maxPrice = 0;
 
         public TreeNodeTwoPlayers(TreeNodeTwoPlayers? parent, string myName, string elephantName, int mySteps, int elephantSteps, int myPrice, int elephantPrice)
         {
@@ -47,12 +48,15 @@ namespace AdventOfCode.Day16
         /// </summary>
         /// <param name="inputs"></param>
         /// <param name="valveDefinitions"></param>
-        public void Build(List<string> inputs, Dictionary<string, ValveDefinition> valveDefinitions)
+        public int Build(List<int> toVisitList, List<string> inputs, Dictionary<string, ValveDefinition> valveDefinitions)
         {
-            foreach (string nextValveMine in inputs)
+            int highestPrice = 0;
+            foreach (int nextValveMineID in toVisitList)
             {
-                foreach (string nextValveElephants in inputs)
+                string nextValveMine = inputs[nextValveMineID];
+                foreach (int nextValveElephantsID in toVisitList)
                 {
+                    string nextValveElephants = inputs[nextValveElephantsID];
                     //Ignore if same valve
                     if (nextValveElephants == nextValveMine)
                         continue;
@@ -64,12 +68,19 @@ namespace AdventOfCode.Day16
                     if (nextDepthElephant > 25 && nextDepthMe > 25)
                         continue;
 
+                    int flags1 = GetPathFlags(GetFullPath(0, nextValveMine), inputs);
+                    int flags2 = GetPathFlags(GetFullPath(1, nextValveElephants), inputs);
+                    bool containsPathFlags = _visitedNodePaths.Contains((flags1, flags2)) || _visitedNodePaths.Contains((flags2, flags1));
+
+                    if (containsPathFlags)
+                        continue;
+
                     string nextValveNameMine = nextValveMine;
                     string nextValveNameElephant = nextValveElephants;
                     int nextPriceMe = MyPrice + (26 - nextDepthMe) * valveDefinitions[nextValveMine].FlowRate;
                     int nextPriceElephant = ElephantPrice + (26 - nextDepthElephant) * valveDefinitions[nextValveElephants].FlowRate;
                     
-                    List<string> newInputs = new(inputs);
+                    List<int> newToVisitList = new(toVisitList);
 
                     //Check if one of points would be too deep
                     if (nextDepthElephant > 25)
@@ -77,45 +88,73 @@ namespace AdventOfCode.Day16
                         nextValveNameElephant = ElephantNodeName;
                         nextPriceElephant = ElephantPrice;
                         nextDepthElephant = _elephantSteps;
-                        newInputs.Remove(nextValveMine);
+                        newToVisitList.Remove(inputs.IndexOf(nextValveNameMine));
+
                     }
                     else if (nextDepthMe > 25)
                     {
                         nextValveNameMine = MyNodeName;
                         nextPriceElephant = MyPrice;
                         nextDepthElephant = _mySteps;
-                        newInputs.Remove(nextValveElephants);
+                        newToVisitList.Remove(inputs.IndexOf(nextValveElephants));
                     }
                     else
                     {
-                        newInputs.Remove(nextValveMine);
-                        newInputs.Remove(nextValveElephants);
+                        newToVisitList.Remove(inputs.IndexOf(nextValveNameMine));
+                        newToVisitList.Remove(inputs.IndexOf(nextValveElephants));
+                    }
+
+                    if (nextPriceElephant + nextPriceMe > highestPrice)
+                    {
+                        highestPrice = nextPriceMe + nextPriceElephant;
+                        if (highestPrice > maxPrice)
+                        {
+                            maxPrice = highestPrice;
+                            int left = Console.CursorLeft;
+                            Console.Write(" " + maxPrice);
+                            Console.CursorLeft = left;
+                        }
                     }
 
                     //Creates new node and builds it
                     TreeNodeTwoPlayers node = new(this, nextValveNameMine, nextValveNameElephant, nextDepthMe, nextDepthElephant, nextPriceMe, nextPriceElephant);
 
-                    node.Build(newInputs, valveDefinitions);
+                    flags1 = GetPathFlags(GetFullPath(0, nextValveNameMine), inputs);
+                    flags2 = GetPathFlags(GetFullPath(1, nextValveNameElephant), inputs);
 
-                    ContainingNodes.Add(node);
+
+                    _visitedNodePaths.Add((flags1, flags2));
+
+                    int buildPrize = node.Build(newToVisitList, inputs, valveDefinitions);
+
+                    if (buildPrize > highestPrice)
+                    {
+                        highestPrice = buildPrize;
+                        if (highestPrice > maxPrice)
+                        {
+                            maxPrice = highestPrice;
+                            int left = Console.CursorLeft;
+                            Console.Write(" " + maxPrice);
+                            Console.CursorLeft = left;
+                        }
+                    }   
                 }
             }
+            return highestPrice;
         }
 
-        /// <summary>
-        /// Gets best price in a tree
-        /// </summary>
-        /// <returns></returns>
-        public int GetBestPrice()
+        public int GetPathFlags(List<string> path, List<string> inputs)
         {
-            int bestPrice = Price;
-            foreach (var node in ContainingNodes)
+            string fpath = "";
+            for (int i = 0; i < path.Count; i++)
             {
-                int price = node.GetBestPrice();
-                if (price > bestPrice)
-                    bestPrice = price;
+                string pathPart = path[i];
+                if (pathPart != "AA")
+                {
+                    fpath += pathPart + ",";
+                }
             }
-            return bestPrice;
+            return fpath.GetHashCode();
         }
 
         /// <summary>
@@ -130,8 +169,41 @@ namespace AdventOfCode.Day16
             {
                 path.Add($"{{{current.MyNodeName},{current.ElephantNodeName}}}");
                 current = current._parent;
-            } 
+            }
             path.Reverse();
+            return path;
+        }
+
+        public List<string> GetFullPath(int player)
+        {
+            List<string> path = new();
+            TreeNodeTwoPlayers? current = this;
+            while (current != null)
+            {
+                if (player == 0)
+                    path.Add(current.MyNodeName);
+                else
+                    path.Add(current.ElephantNodeName);
+                current = current._parent;
+            }
+            path.Reverse();
+            return path;
+        }
+
+        public List<string> GetFullPath(int player, string next)
+        {
+            List<string> path = new();
+            TreeNodeTwoPlayers? current = this;
+            while (current != null)
+            {
+                if (player == 0)
+                    path.Add(current.MyNodeName);
+                else
+                    path.Add(current.ElephantNodeName);
+                current = current._parent;
+            }
+            path.Reverse();
+            path.Add(next);
             return path;
         }
 
